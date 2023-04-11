@@ -1,29 +1,37 @@
 <template>
   <q-card-section class="row text-center">
+
     <q-card-section class="col text-h4 text-primary">
-      {{  header || "welCome" }}
-      <!--add item or modi-->
-      <q-btn
-        v-if="editing"
-        @click="doEdit(false)"
+
+      {{ header || "welCome" }}
+
+  <!--cancle-->
+  <q-btn
+    v-if="editing"
+    @click="doEdit(false)"
+    unelevated
+    rounded
+    icon-right="clear"
+    label="Cancel">
+  </q-btn>
+
+  <!--add item-->
+  <q-btn
+  v-else
+  @click="doEdit(true)"
+  color="primary"
         unelevated
         rounded
-        icon-right="clear"
-        label="Cancel"
-      ></q-btn>
-      <q-btn
-      v-else
-      @click="doEdit(true)"
-      color="primary"
-            unelevated
-            rounded
-            icon-right="send"
-            label="Add Item"
-      ></q-btn>
-    </q-card-section>
-  </q-card-section>
+        icon-right="send"
+        label="Add Item">
+  </q-btn>
 
-  <!--item add-->
+
+  </q-card-section >
+
+
+  </q-card-section>
+ <!--아이템 -->
   <q-card-section class="row justify-center">
     <q-card-section v-if="editing" class="col-8 col-md-3">
       <q-input
@@ -44,13 +52,16 @@
       ></q-checkbox>
     </q-card-section>
 
-    <!--saveItem-->
+    <!--내용저장-->
      <q-card-section v-if="editing" class="col-12 col-md-3">
       <q-btn outline rounded color="primary" @click="saveItem()" label="아이템 저장"></q-btn>
     </q-card-section>
   </q-card-section>
 
-  <!--list-->
+
+
+
+<!--아이템 리스트 출력-->
   <q-card-section>
     <q-list bordered>
       <q-item
@@ -69,9 +80,9 @@
         </q-item-section>
       </q-item>
     </q-list>
+
   </q-card-section>
 
-  <!--notify-->
   <q-item-section class="row text-center">
         <q-card-section>
           <span v-if="items.length === 0"
@@ -79,39 +90,43 @@
           >
         </q-card-section>
   </q-item-section>
+
+
 </template>
 
 <script>
-export default {
-  name:"ShoppingList",
-  title:"쇼핑 리스트",
-  data(){
-    return {
-      header:"Shopping List App",
-      items : [
+  export default {
+    name:"ShoppingList",
+    title:"쇼핑 리스트",
+    data(){
+      return {
+        header:"Shopping List App",
+        items : [
         // { id: 1, label: "10 party hats", purchased: true, highPriority: false },
         // { id: 2, label: "2 board games", purchased: true, highPriority: false },
         // { id: 3, label: "20 cups", purchased: false, highPriority: true },
       ],
       editing:false,
       newItem:"",
-      newItemHighPriority:false,
-    }
-  },
-  computed : {
+      newItemHightPriority:false,
+      }
+    },
+    computed : {
     reversedItems(){
       return [...this.items].reverse();
-    }
-  },
-  methods :{
+     }
+   },
+   methods :{
     togglePurchased(item){
       item.purchased = !item.purchased;
     },
+
     doEdit(editing){
       this.editing = editing;
       this.newItem = "";
-      this.newItemHighPriority = false;
+      this.newItemHightPriority = false;
     },
+
     async saveItem(){
       if(this.newItem.length == 0) return;
       this.items.push({
@@ -128,10 +143,11 @@ export default {
       });
       this.newItem = "";
       this.newItemHighPriority =false;
-    }
   }
 
-}
+
+
+   }}
 </script>
 
 <style>
@@ -143,4 +159,5 @@ export default {
   color: #de751f;
   font-weight: 600;
 }
+
 </style>
