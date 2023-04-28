@@ -60,6 +60,12 @@ const linksList = [
     caption: 'vue 실습 1',
     icon: 'code',
     link:'/shop'
+  },
+  {
+    title: 'todo',
+    caption: 'vue component 실습',
+    icon: 'home',
+    link:'/todo'
   }
 
 ]
